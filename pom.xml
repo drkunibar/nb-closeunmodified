@@ -11,6 +11,11 @@
   <packaging>nbm</packaging>
   <name>Netbeans Module Close Unmodified Editors</name>
   <description>Close unmodified editors</description>
+  <scm>
+    <connection>scm:git:git@github.com:drkunibar/nb-closeunmodified.git</connection>
+    <developerConnection>scm:git:git@github.com:drkunibar/nb-closeunmodified.git</developerConnection>
+    <url>https://github.com/drkunibar/nb-closeunmodified.git</url>
+  </scm>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.release>17</maven.compiler.release>
