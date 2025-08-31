@@ -4,18 +4,13 @@
   <parent>
     <groupId>io.github.drkunibar.netbeans</groupId>
     <artifactId>nb-parent</artifactId>
-    <version>1.0.2</version>
+    <version>1.1.0</version>
   </parent>
   <artifactId>nb-closeunmodified</artifactId>
-  <version>1.0.0</version>
+  <version>1.1-SNAPSHOT</version>
   <packaging>nbm</packaging>
   <name>Netbeans Module Close Unmodified Editors</name>
   <description>Close unmodified editors</description>
-  <scm>
-    <connection>scm:git:git@github.com:drkunibar/nb-closeunmodified.git</connection>
-    <developerConnection>scm:git:git@github.com:drkunibar/nb-closeunmodified.git</developerConnection>
-    <url>https://github.com/drkunibar/nb-closeunmodified.git</url>
-  </scm>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.release>17</maven.compiler.release>
@@ -57,6 +52,11 @@
       <artifactId>org-openide-util-lookup</artifactId>
       <version>${netbeans.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.netbeans.api</groupId>
+      <artifactId>org-openide-util-ui</artifactId>
+      <version>${netbeans.version}</version>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
@@ -66,9 +66,9 @@
         <extensions>true</extensions>
         <configuration>
           <codeNameBase>io.github.drkunibar.netbeans.nb-closeunmodified</codeNameBase>
-          <licenseFile>src/main/resources/LICENSE.txt</licenseFile>
           <licenseName>Apache License, Version 2.0</licenseName>
-          <useOSGiDependencies>false</useOSGiDependencies>
+          <licenseFile>src/main/resources/LICENSE.txt</licenseFile>
+          <homePageUrl>https://github.com/drkunibar/nb-closeunmodified</homePageUrl>
           <netbeansUserdir>${basedir}/userdir</netbeansUserdir>
         </configuration>
       </plugin>

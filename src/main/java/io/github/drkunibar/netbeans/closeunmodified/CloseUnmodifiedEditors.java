@@ -9,6 +9,7 @@ import javax.swing.SwingUtilities;
 
 import org.openide.awt.ActionID;
 import org.openide.awt.ActionReference;
+import org.openide.awt.ActionReferences;
 import org.openide.awt.ActionRegistration;
 import org.openide.filesystems.FileObject;
 import org.openide.loaders.DataObject;
@@ -20,7 +21,8 @@ import org.openide.windows.WindowManager;
 
 @ActionID(category = "Window", id = "io.github.drkunibar.netbeans.closeunmodified.CloseUnmodifiedEditors")
 @ActionRegistration(iconBase = "io/github/drkunibar/netbeans/closeunmodified/close16x16.png", displayName = "#CTL_CloseUnmodifiedEditors")
-@ActionReference(path = "Menu/Window", position = 20625)
+@ActionReferences({ @ActionReference(path = "Menu/Window", position = 20625),
+        @ActionReference(path = "Editors/TabActions", position = 0, separatorBefore = -50) })
 @Messages("CTL_CloseUnmodifiedEditors=Close Unmodified Editors")
 public final class CloseUnmodifiedEditors implements ActionListener {
 
@@ -33,9 +35,9 @@ public final class CloseUnmodifiedEditors implements ActionListener {
 
     private void closeEditors() {
         Collection<TopComponent> closeableTopComponents = getCloseableTopComponents();
-        SwingUtilities.invokeLater(() -> {
-            closeableTopComponents.forEach(TopComponent::close);
-        });
+        for (TopComponent tc : closeableTopComponents) {
+            SwingUtilities.invokeLater(tc::close);
+        }
     }
 
     private Collection<TopComponent> getCloseableTopComponents() {
@@ -48,13 +50,13 @@ public final class CloseUnmodifiedEditors implements ActionListener {
                 .filter(wm::isEditorTopComponent)
                 // is it a cloneable
                 .filter(tc -> tc instanceof CloneableTopComponent)
-                // ca be closed
+                // can be closed
                 .filter(tc -> tc.canClose())
                 // check if file is changed
                 .filter((TopComponent tc) -> {
                     Lookup lookup = tc.getLookup();
                     DataObject dataObject = lookup.lookup(DataObject.class);
-                    if (dataObject == null) {
+                    if (dataObject == null || dataObject.isModified()) {
                         return false;
                     }
                     FileObject primaryFile = dataObject.getPrimaryFile();
