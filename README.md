@@ -11,3 +11,7 @@ There is also a toolbar button, which you can add to the toolbar
 ![Add Close Unmodified Editors Toolbar](doc/close-add-toolbar.png)
 
 ![Close Unmodified Editors Toolbar](doc/close-toolbar.png)
+
+Last but not least, you can use the context menu of the editor tab
+
+![Close Unmodified Editor Context Menu](doc/close-contextmenu.png)

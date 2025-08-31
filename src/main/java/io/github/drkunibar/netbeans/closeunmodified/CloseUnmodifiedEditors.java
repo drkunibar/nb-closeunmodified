@@ -21,7 +21,8 @@ import org.openide.windows.WindowManager;
 
 @ActionID(category = "Window", id = "io.github.drkunibar.netbeans.closeunmodified.CloseUnmodifiedEditors")
 @ActionRegistration(iconBase = "io/github/drkunibar/netbeans/closeunmodified/close16x16.png", displayName = "#CTL_CloseUnmodifiedEditors")
-@ActionReference(path = "Menu/Window", position = 20625)
+@ActionReferences({ @ActionReference(path = "Menu/Window", position = 20625),
+        @ActionReference(path = "Editors/TabActions", position = 0, separatorBefore = -50) })
 @Messages("CTL_CloseUnmodifiedEditors=Close Unmodified Editors")
 public final class CloseUnmodifiedEditors implements ActionListener {
 
