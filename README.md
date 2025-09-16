@@ -15,3 +15,13 @@ There is also a toolbar button, which you can add to the toolbar
 Last but not least, you can use the context menu of the editor tab
 
 ![Close Unmodified Editor Context Menu](doc/close-contextmenu.png)
+
+# Changelog
+
+## 1.1.0
+
+- Add action in contextmenu
+
+## 1.0.0
+
+- First Version

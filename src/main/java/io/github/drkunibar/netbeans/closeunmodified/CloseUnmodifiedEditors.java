@@ -13,6 +13,7 @@ import org.openide.awt.ActionReferences;
 import org.openide.awt.ActionRegistration;
 import org.openide.filesystems.FileObject;
 import org.openide.loaders.DataObject;
+import org.openide.text.CloneableEditorSupport;
 import org.openide.util.Lookup;
 import org.openide.util.NbBundle.Messages;
 import org.openide.windows.CloneableTopComponent;
@@ -50,8 +51,10 @@ public final class CloseUnmodifiedEditors implements ActionListener {
                 .filter(wm::isEditorTopComponent)
                 // is it a cloneable
                 .filter(tc -> tc instanceof CloneableTopComponent)
-                // can be closed
-                .filter(tc -> tc.canClose())
+                // chek if file is saved
+                .filter(this::isSaved)
+                // check if TopComponent can be closed
+                .filter(TopComponent::canClose)
                 // check if file is changed
                 .filter((TopComponent tc) -> {
                     Lookup lookup = tc.getLookup();
@@ -67,5 +70,11 @@ public final class CloseUnmodifiedEditors implements ActionListener {
                     return !Objects.equals(isModified, Boolean.TRUE);
                 })
                 .collect(Collectors.toList());
+    }
+
+    private boolean isSaved(TopComponent tc) {
+        CloneableEditorSupport editorSupport = tc.getLookup().lookup(CloneableEditorSupport.class);
+        return editorSupport != null && !editorSupport.isModified();
+
     }
 }
